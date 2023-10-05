@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import PieChartComponent from "../components/PieChartComponent";
 import { Container, Typography } from "@mui/material";
 import TextProfileCard3 from "../components/TextProfileCard3";
+import CircleAvatar from "../components/CircleAvatar";
 
 const Profile = () => {
   return (
@@ -21,8 +22,7 @@ const Profile = () => {
                 </h3>
               </div>
               <div className="xl:row-span-2 row-start-1 row-span-3 flex justify-center items-center">
-                <div
-                  className={`bg-[url('https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png')] md:w-[240px] md:h-[240px] w-[150px] h-[150px] bg-cover rounded-full`}></div>
+                <CircleAvatar imageUrl={"https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png"} size={"[150px]"} classAdd="md:w-[240px] md:h-[240px]" howRounded={"full"}/>
               </div>
               <div className="flex justify-center flex-col items-center xl:items-start">
                 <h3 className="text-primary font-bold xl:text-xl text:sm">

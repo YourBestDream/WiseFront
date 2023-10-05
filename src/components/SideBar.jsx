@@ -49,6 +49,8 @@ const SideBar = () => {
           className={"h-[30px] w-[70px] self-center"}
           alt=""
         />
+
+        
       </div>
     </>
   );
