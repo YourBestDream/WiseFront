@@ -5,6 +5,7 @@ import Login from "./routes/Login";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import { useEffect, useState } from "react";
+import Results from "./routes/Results";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/results" element={<Results />} />
             </Routes>
           </div>
         </div>

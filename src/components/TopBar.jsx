@@ -8,7 +8,7 @@ import { toggleSideBar } from "../features/sideBarSlice";
 const TopBar = () => {
   const dispath = useDispatch();
   return (
-    <div className="relative flex w-full h-[50px] lg:h-[70px] justify-center bg-secondary items-center shadow-topBar">
+    <div className="fixed top-0 left-0 flex w-full h-[50px] lg:h-[70px] justify-center bg-secondary items-center shadow-topBar z-[1000]">
       <FiMenu
         onClick={() => dispath(toggleSideBar())}
         className="w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] xl:hidden md:left-[53px] left-[26px] absolute "

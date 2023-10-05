@@ -25,17 +25,17 @@ const SideBar = () => {
   }, []);
   return fullScreen ? (
     <>
-      <div className={`bg-menu  h-[100vh] w-[300px] flex flex-col`}></div>
+      <div className={`bg-menu  min-h-[100vh] w-[300px] flex flex-col`}></div>
     </>
   ) : (
     <>
       <div
         onClick={() => dispatch(toggleSideBar())}
-        className={`backdrop-blur-md fixed top-0 left-0 w-full h-[100vh] ${
+        className={`z-[1000] backdrop-blur-md fixed top-0 left-0 w-full h-[100vh] ${
           sideBar ? "block" : "hidden"
         }`}></div>
       <div
-        className={`bg-menu absolute text-[#B4B4B4] top-0 left-0 h-[100vh] w-[280px] flex flex-col transform ${
+        className={`z-[1000] bg-menu absolute text-[#B4B4B4] top-0 left-0 min-h-[100vh] w-[280px] flex flex-col transform ${
           sideBar ? "translate-x-0" : "-translate-x-full"
         } transition-all duration-400`}>
         <RxCross2
