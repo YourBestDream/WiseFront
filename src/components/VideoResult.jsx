@@ -1,12 +1,12 @@
 import React from "react";
 import CircleAvatar from "./CircleAvatar";
 
-const VideoResult = () => {
+const VideoResult = ({img, title, channelTitle, published, channelImg, viewCount}) => {
   return (
     <div className="w-full lg:h-[210px] md:h-[180px] h-[340px] relative mb-[30px]">
       <div className="w-full h-full flex flex-col md:flex-row">
         <CircleAvatar
-          imageUrl={"https://i.ytimg.com/vi/Olhqs3CWUAU/maxresdefault.jpg"}
+          imageUrl={img}
           size={"full"}
           howRounded={"xl"}
           classAdd="2xl:w-[23%] lg:w-[30%] md:w-[35%] relative">
@@ -16,21 +16,21 @@ const VideoResult = () => {
         </CircleAvatar>
         <div className="md:pl-[20px]">
           <h3 className="lg:text-2xl md:text-md sm:text-sm text-[#2F4846] font-[500] md:pt-[0] pt-[20px]">
-            How To Download and Install Minecraft Mods (2023)
+            {title}
           </h3>
           <h4 className="lg:text-sm text-xs text-[#747474] py-[12px]">
-            687k views · 8 months ago
+            {viewCount} views · {published}
           </h4>
           <div className="flex items-center">
             <CircleAvatar
-              size={"[25px]"}
+              size={"8"}
               imageUrl={
-                "https://yt3.googleusercontent.com/0s4g6_BwK9CyfAy_j6eF204d86TzIAvrLZNmh9BVrYFpXrhDxjKaheX0m8wowJg1h53HR_-8Vw=s900-c-k-c0x00ffffff-no-rj"
+                channelImg
               }
               howRounded={"full"}
             />
             <h4 className="lg:text-sm text-xs text-[#747474] pl-2">
-              The Breakdown
+              {channelTitle}
             </h4>
           </div>
         </div>

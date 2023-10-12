@@ -4,8 +4,8 @@ import Profile from "./routes/Profile";
 import Login from "./routes/Login";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
-import { useEffect, useState } from "react";
 import Results from "./routes/Results";
+import GoogleAPIComponent from "./routes/GoogleAPIComponent";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/results" element={<Results />} />
+              <Route path="/loginTry" element={<GoogleAPIComponent />} />
             </Routes>
           </div>
         </div>
