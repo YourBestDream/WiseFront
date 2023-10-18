@@ -3,7 +3,10 @@ import VideoResult from "../components/VideoResult";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import LoadingIndicator from "../components/LoadingIndicator";
-import { getTimeSinceUpload, formatViewCount} from "../functions/videoResultHelpFunctions";
+import {
+  getTimeSinceUpload,
+  formatViewCount,
+} from "../functions/videoResultHelpFunctions";
 
 const Results = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -30,6 +33,12 @@ const Results = () => {
       const videoIds = response.data.items
         .map((video) => video.id.videoId)
         .join(",");
+
+      response.data.items.forEach((video) => {
+        if (videos.includes(video)) {
+          console.log(video);
+        }
+      });
       const channelIds = response.data.items
         .map((video) => video.snippet.channelId)
         .join(",");
@@ -50,7 +59,10 @@ const Results = () => {
         ...prevChannels,
         ...channelInfoResponse.data.items,
       ]);
-      setVideos((prevVideos) => [...prevVideos, ...response.data.items]);
+      const newVideos = response.data.items.filter(
+        (video) => !videos.some((v) => v.id.videoId === video.id.videoId)
+      );
+      setVideos((prevVideos) => [...prevVideos, ...newVideos]);
       console.log("end");
     } catch (error) {
       console.error("Error fetching data from YouTube API:", error);
@@ -130,7 +142,7 @@ const Results = () => {
           videos.map(function (video, index) {
             return (
               <VideoResult
-                key={video.id.videoId}
+                key={index}
                 img={video.snippet.thumbnails.high.url}
                 title={video.snippet.title}
                 channelTitle={video.snippet.channelTitle}
