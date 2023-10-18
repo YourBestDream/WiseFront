@@ -6,6 +6,7 @@ import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Results from "./routes/Results";
 import GoogleAPIComponent from "./routes/GoogleAPIComponent";
+import Statistics from "./routes/Statistics/Statistics";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/results" element={<Results />} />
               <Route path="/loginTry" element={<GoogleAPIComponent />} />
+              <Route path="/results/stats" element={<Statistics />} />
             </Routes>
           </div>
         </div>
