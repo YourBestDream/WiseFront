@@ -1,7 +1,9 @@
 import React from "react";
 import CircleAvatar from "./CircleAvatar";
+import { useNavigate } from "react-router-dom";
 
-const VideoResult = ({img, title, channelTitle, published, channelImg, viewCount}) => {
+const VideoResult = ({videoId, img, title, channelTitle, published, channelImg, viewCount}) => {
+  const navigate = useNavigate();
   return (
     <div className="w-full lg:h-[210px] md:h-[180px] h-[340px] relative mb-[30px]">
       <div className="w-full h-full flex flex-col md:flex-row">
@@ -35,7 +37,7 @@ const VideoResult = ({img, title, channelTitle, published, channelImg, viewCount
           </div>
         </div>
       </div>
-      <div className="rounded-full bg-[#517C77] absolute right-0 bottom-0 cursor-pointer">
+      <div className="rounded-full bg-[#517C77] absolute right-0 bottom-0 cursor-pointer" onClick={() => navigate(`/results/${videoId}`)}>
         <h3 className="text-[#fff] lg:text-2xl text-md font-[Karla] px-4 py-2">
           Analyze the video
         </h3>

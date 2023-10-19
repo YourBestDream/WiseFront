@@ -21,7 +21,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/results" element={<Results />} />
               <Route path="/loginTry" element={<GoogleAPIComponent />} />
-              <Route path="/results/stats" element={<Statistics />} />
+              <Route path="/results/:videoId" element={<Statistics />} />
             </Routes>
           </div>
         </div>

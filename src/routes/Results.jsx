@@ -143,6 +143,7 @@ const Results = () => {
             return (
               <VideoResult
                 key={index}
+                videoId={video.id.videoId}
                 img={video.snippet.thumbnails.high.url}
                 title={video.snippet.title}
                 channelTitle={video.snippet.channelTitle}

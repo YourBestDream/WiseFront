@@ -3,40 +3,49 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import GoogleButton from "../components/GoogleButton";
+import { setCookie, setCookieForMinutes } from "../functions/cookies";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     /*global google*/
-    google.accounts.id.renderButton(
-      document.getElementById("google-login-button"),
-      {
-        theme: "outline",
-        size: "large",
-      }
-    );
+    google.accounts.id.initialize({
+      client_id: CLIENT_ID,
+      callback: handleCallbackResponse,
+      scope:
+        "https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtubepartner",
+    });
   }, []);
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      // const decoded = jwt_decode(tokenResponse.access_token);
-      // console.log(decoded);
-      console.log(tokenResponse)
-      // const response = await axios.post("http://localhost:8080/api/v1/authentication/registration", {"googleIdToken" : tokenResponse.access_token});
-      // console.log(response.data)
-      setLoading(false);
-    },
-    onError: (error) => {
-      alert(error)
-      setLoading(false);
-    },
-    scope:
-      "https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtubepartner",
-  });
+  const handleCallbackResponse = async (response) => {
+    console.log(response.credential);
+    try {
+      const responseToken = await axios.post(
+        "http://localhost:8080/api/v1/authentication/registration",
+        {
+          googleIdToken: response.credential,
+        }
+      );
+      setCookie(
+        "access_token",
+        responseToken.data.accessToken,
+        responseToken.data.expirationTime
+      );
+      setCookieForMinutes("refresh_token", responseToken.data.refreshToken, 30);
+      navigate("/profile");
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+  };
 
   const loginWrapper = () => {
     setLoading(true);
-    login();
+    google.accounts.id.prompt();
   };
 
   return (
