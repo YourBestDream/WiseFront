@@ -45,15 +45,15 @@ export default function Card_Graph() {
         <div className='card-container'>
             <div className = 'card'>
                 <div className='header'>
-                    {"Views"}
+                    {"Views in the Last Month"}
                 </div>
                 <div className='graph'>
-                    <ResponsiveContainer width="100%" height={200}>
+                    <ResponsiveContainer>
                         <AreaChart data={data}>
-                            <Area dataKey="views" type="monotone" stroke="#8d6ccf" dot={{fill:"#8d6ccf"}} fill = "#8d6ccf" fillOpacity={0.9} strokeWidth={2}/>
+                            <Area dataKey="views" type="monotone" stroke="#8d6ccf" fill = "#8d6ccf" fillOpacity={0.9} strokeWidth={2}/>
                             <CartesianGrid stroke="#517C77" strokeWidth={0.69}/>
-                            <XAxis dataKey="day" stroke="#517C77" fontsize={8.276}/>
-                            <YAxis dataKey="views" stroke="#517C77"/>
+                            <XAxis dataKey="day" stroke="#517C77" fontsize={8.276} style={{fontSize: "clamp(6px,1vw,12px)"}}/>
+                            <YAxis dataKey="views" stroke="#517C77" style={{fontSize: "clamp(6px,1vw,12px)"}}/>
                             <Tooltip/>
                         </AreaChart>
                     </ResponsiveContainer>

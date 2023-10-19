@@ -14,16 +14,18 @@ export default function Statistics() {
                 </svg>
                 <p>How to Download and Install Minecraft Mods (2023)</p>
             </div>
-            <div className='cards-wrapper'>
-                <div className='pair'>
-                <Card text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
-                <CardTags tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}]}/>
-                </div>
-                <div className='pair'>
-                <CardGraph />
-                <CardHelp 
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}]}/>
+            <div className='card-box'>
+                <div className='cards-wrapper'>
+                    <div className='pair'>
+                        <Card text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+                        <CardTags tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Klein"}, {tag: "Nazi"}, {tag: "Slavery"}, {tag: "LMLMLMLM"}, {tag: "Coinflip"}, {tag: "JJK"}]}/>
+                    </div>
+                    <div className='pair'>
+                        <CardGraph />
+                        <CardHelp 
+                        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Klein"}, {tag: "Nazi"}, {tag: "Slavery"}, {tag: "LMLMLMLM"}, {tag: "Coinflip"}, {tag: "JJK"}]}/>
+                    </div>
                 </div>
             </div>
         </div>
