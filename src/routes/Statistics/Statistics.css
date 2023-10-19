@@ -1,0 +1,31 @@
+.stats-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 95px;
+    padding-bottom: 25px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.stats-header p{
+    font-size: 32px;
+    width: 42.8vw;
+    padding-left: 2.6vw;
+    font-weight: 700;
+    color: #2F4846;
+}
+.pair{
+    display: flex;
+    justify-content: center;
+    /* align-items: start; */
+    flex-direction: column;
+}
+.cards-wrapper {
+    display: flex;
+    position: relative;
+    flex:1;
+    flex-direction: row;
+    margin: 0 auto;
+  }
