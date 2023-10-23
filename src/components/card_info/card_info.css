@@ -36,6 +36,11 @@
     font-size: clamp(15px,2.3vw,28px);
 }
 
+.card .svgicon{
+    width:clamp(16px,2vw,24px);
+    height:clamp(16px,2vw,24px);
+}
+
 .card .text{
     padding-top: 10px;
     font-size: clamp(12px,1.95vw,18px);

@@ -52,7 +52,7 @@ export default function Card_Graph() {
                         <AreaChart data={data}>
                             <Area dataKey="views" type="monotone" stroke="#8d6ccf" fill = "#8d6ccf" fillOpacity={0.9} strokeWidth={2}/>
                             <CartesianGrid stroke="#517C77" strokeWidth={0.69}/>
-                            <XAxis dataKey="day" stroke="#517C77" fontsize={8.276} style={{fontSize: "clamp(6px,1vw,12px)"}}/>
+                            <XAxis dataKey="day" stroke="#517C77" style={{fontSize: "clamp(6px,1vw,12px)"}}/>
                             <YAxis dataKey="views" stroke="#517C77" style={{fontSize: "clamp(6px,1vw,12px)"}}/>
                             <Tooltip/>
                         </AreaChart>
