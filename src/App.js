@@ -5,8 +5,8 @@ import Login from "./routes/Login";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Results from "./routes/Results";
-import GoogleAPIComponent from "./routes/GoogleAPIComponent";
 import Statistics from "./routes/Statistics/Statistics";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -17,11 +17,41 @@ function App() {
           <SideBar />
           <div className="w-full">
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/results" element={<Results />} />
-              <Route path="/loginTry" element={<GoogleAPIComponent />} />
-              <Route path="/results/:videoId" element={<Statistics />} />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/results"
+                element={
+                  <PrivateRoute>
+                    <Results />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/results/:videoId"
+                element={
+                  <PrivateRoute>
+                    <Statistics />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={<PrivateRoute forLoggin={true} />}></Route>
+              <Route
+                path="/*"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </div>
         </div>

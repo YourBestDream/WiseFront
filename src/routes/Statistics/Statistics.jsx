@@ -4,7 +4,7 @@ import CardTags from "../../components/card_tags/card_tags";
 import CardGraph from "../../components/card_graph/card_graph";
 import CardHelp from "../../components/card_help/card_help";
 import "./Statistics.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ export default function Statistics() {
       <div className="stats">
         <div className="stats-header">
           <svg
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/results")}
             xmlns="http://www.w3.org/2000/svg"
             width="13"
             height="30"

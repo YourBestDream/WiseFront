@@ -8,7 +8,7 @@ import CircleAvatar from "../components/CircleAvatar";
 
 const Profile = () => {
   return (
-    <div className="bg-primary h-[100vh] pt-[50px] lg:pt-[70px]">
+    <div className="bg-primary pt-[50px] lg:pt-[70px] min-h-[100vh]">
       <div className="p-[20px] grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         <Card>
           <div className="flex items-center h-full w-full">
@@ -22,7 +22,14 @@ const Profile = () => {
                 </h3>
               </div>
               <div className="xl:row-span-2 row-start-1 row-span-3 flex justify-center items-center">
-                <CircleAvatar imageUrl={"https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png"} size={"[150px]"} classAdd="md:w-[240px] md:h-[240px]" howRounded={"full"}/>
+                <CircleAvatar
+                  imageUrl={
+                    "https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png"
+                  }
+                  size={"[150px]"}
+                  classAdd="md:w-[240px] md:h-[240px]"
+                  howRounded={"full"}
+                />
               </div>
               <div className="flex justify-center flex-col items-center xl:items-start">
                 <h3 className="text-primary font-bold xl:text-xl text:sm">

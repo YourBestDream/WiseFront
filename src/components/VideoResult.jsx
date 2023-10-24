@@ -2,7 +2,15 @@ import React from "react";
 import CircleAvatar from "./CircleAvatar";
 import { useNavigate } from "react-router-dom";
 
-const VideoResult = ({videoId, img, title, channelTitle, published, channelImg, viewCount}) => {
+const VideoResult = ({
+  videoId,
+  img,
+  title,
+  channelTitle,
+  published,
+  channelImg,
+  viewCount,
+}) => {
   const navigate = useNavigate();
   return (
     <div className="w-full lg:h-[210px] md:h-[180px] h-[340px] relative mb-[30px]">
@@ -16,7 +24,7 @@ const VideoResult = ({videoId, img, title, channelTitle, published, channelImg, 
             <h4 className="text-[#fff] font-bold text-sm">15:20</h4>
           </div>
         </CircleAvatar>
-        <div className="md:pl-[20px]">
+        <div className="md:pl-[20px] 2xl:w-[75%] lg:w-[68%] md:w-[63%]">
           <h3 className="lg:text-2xl md:text-md sm:text-sm text-[#2F4846] font-[500] md:pt-[0] pt-[20px]">
             {title}
           </h3>
@@ -26,9 +34,7 @@ const VideoResult = ({videoId, img, title, channelTitle, published, channelImg, 
           <div className="flex items-center">
             <CircleAvatar
               size={"8"}
-              imageUrl={
-                channelImg
-              }
+              imageUrl={channelImg}
               howRounded={"full"}
             />
             <h4 className="lg:text-sm text-xs text-[#747474] pl-2">
@@ -37,7 +43,9 @@ const VideoResult = ({videoId, img, title, channelTitle, published, channelImg, 
           </div>
         </div>
       </div>
-      <div className="rounded-full bg-[#517C77] absolute right-0 bottom-0 cursor-pointer" onClick={() => navigate(`/results/${videoId}`)}>
+      <div
+        className="rounded-full bg-[#517C77] absolute right-0 bottom-0 cursor-pointer"
+        onClick={() => navigate(`/results/${videoId}`)}>
         <h3 className="text-[#fff] lg:text-2xl text-md font-[Karla] px-4 py-2">
           Analyze the video
         </h3>

@@ -31,11 +31,11 @@ const SideBar = () => {
     <>
       <div
         onClick={() => dispatch(toggleSideBar())}
-        className={`z-[1000] backdrop-blur-md fixed top-0 left-0 w-full h-[100vh] ${
+        className={`z-[1000] backdrop-blur-md fixed top-0 left-0 w-full min-h-[100vh] ${
           sideBar ? "block" : "hidden"
         }`}></div>
       <div
-        className={`z-[1000] bg-menu absolute text-[#B4B4B4] top-0 left-0 min-h-[100vh] w-[280px] flex flex-col transform ${
+        className={`z-[1000] bg-menu fixed text-[#B4B4B4] top-0 left-0 min-h-[100vh] w-[280px] flex flex-col transform ${
           sideBar ? "translate-x-0" : "-translate-x-full"
         } transition-all duration-400`}>
         <RxCross2
@@ -49,8 +49,6 @@ const SideBar = () => {
           className={"h-[30px] w-[70px] self-center"}
           alt=""
         />
-
-        
       </div>
     </>
   );
