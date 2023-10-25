@@ -36,8 +36,7 @@ export default function Statistics() {
 
   const fetchSummary = async () => {
     try {
-      // const res = await axios.get(`/results/${videoId}`);
-      const res = await axios.get("http://172.31.141.136:5000/results/stats");
+      const res = await axios.get(`/results/${videoId}`);
       setData(res.data);
       console.log(res.data);
     } catch (error) {
