@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import VideoResult from "../components/VideoResult";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import LoadingIndicator from "../components/LoadingIndicator";
 import {
   getTimeSinceUpload,
   formatViewCount,
 } from "../functions/videoResultHelpFunctions";
+import {
+  setVideosGlobal,
+  setChannelsGlobal,
+  setTotalCountGlobal,
+  setVideosInfoGlobal,
+  setPageGlobal,
+  setScrollPosition,
+  setPrevPage,
+  setVideoId,
+} from "../features/resultsSlice";
+import { useNavigate } from "react-router-dom";
 
 const Results = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -14,13 +25,48 @@ const Results = () => {
   const [videosInfo, setVideosInfo] = useState([]);
   const [channels, setChannels] = useState([]);
   const search = useSelector((state) => state.search.text);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [page, setPage] = useState("");
   const [fetching, setFetching] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const maxResults = 10;
+  const prev = useSelector((state) => state.results.prevPage);
+  const videosState = useSelector((state) => state.results.videos);
+  const videoInfoState = useSelector((state) => state.results.videosInfo);
+  const channelsState = useSelector((state) => state.results.channels);
+  const pageState = useSelector((state) => state.results.page);
+  const totalCountState = useSelector((state) => state.results.totalCount);
+  const scrollPosition = useSelector((state) => state.results.scrollPosition);
+  const videoIdGlobal = useSelector((state) => state.results.videoId);
+
+  useEffect(() => {
+    console.log(videoIdGlobal);
+    const element = document.getElementById(videoIdGlobal);
+    if (element != null && videoIdGlobal !== "") {
+      dispatch(setVideosGlobal([]));
+      dispatch(setVideosInfoGlobal([]));
+      dispatch(setChannelsGlobal([]));
+      dispatch(setPageGlobal(""));
+      dispatch(setTotalCountGlobal(0));
+      dispatch(setScrollPosition(0));
+      dispatch(setPrevPage(""));
+      dispatch(setVideoId(""));
+      element.scrollIntoView();
+    }
+  }, [videos]);
 
   const request = async () => {
+    if (prev === "statistics" && videosState.length !== 0) {
+      console.log("entered");
+      setVideos(videosState);
+      setVideosInfo(videoInfoState);
+      setChannels(channelsState);
+      setPage(pageState);
+      setTotalCount(totalCountState);
+      return;
+    }
     try {
       setLoading(true);
 
@@ -128,6 +174,18 @@ const Results = () => {
     );
     return matchingVideo ? matchingVideo.statistics.viewCount : "";
   }
+  const videoResultClick = (videoId) => {
+    dispatch(setChannelsGlobal(channels));
+    dispatch(setVideosGlobal(videos));
+    dispatch(setVideosInfoGlobal(videosInfo));
+    dispatch(setPageGlobal(page));
+    dispatch(setTotalCountGlobal(totalCount));
+    dispatch(setScrollPosition(window.scrollY));
+    dispatch(setVideoId(videoId));
+    navigate(`/results/${videoId}`);
+  };
+
+  let lastMinusOne = -1;
 
   return (
     <div className="bg-primary min-h-[100vh]">
@@ -144,6 +202,7 @@ const Results = () => {
               <VideoResult
                 key={index}
                 videoId={video.id.videoId}
+                click={videoResultClick}
                 img={video.snippet.thumbnails.high.url}
                 title={video.snippet.title}
                 channelTitle={video.snippet.channelTitle}

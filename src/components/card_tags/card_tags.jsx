@@ -47,7 +47,7 @@ const Card_tags = ({ tags }) => {
           </svg>
         </div>
         <div className="tag-box">
-          {tags.length > 0 ? (
+          {tags.length > 0 && tags !== undefined ? (
             tags.map((e, index) => (
               <div className="messages">
                 <span key={index}>{e.tag}</span>

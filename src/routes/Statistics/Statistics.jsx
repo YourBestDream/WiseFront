@@ -4,8 +4,10 @@ import CardTags from "../../components/card_tags/card_tags";
 import CardGraph from "../../components/card_graph/card_graph";
 import CardHelp from "../../components/card_help/card_help";
 import "./Statistics.css";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { setPrevPage } from "../../features/resultsSlice";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 export default function Statistics() {
@@ -13,6 +15,7 @@ export default function Statistics() {
   const { videoId } = useParams();
   const navigate = useNavigate();
   const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     initRequest();
   }, []);
@@ -32,7 +35,10 @@ export default function Statistics() {
       <div className="stats">
         <div className="stats-header">
           <svg
-            onClick={() => navigate("/results")}
+            onClick={() => {
+              dispatch(setPrevPage("statistics"))
+              navigate("/results");
+            }}
             xmlns="http://www.w3.org/2000/svg"
             width="13"
             height="30"
