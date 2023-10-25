@@ -3,7 +3,7 @@ import "./card_tags.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Card_tags = ({ tags }) => {
+const CardTags = ({ tags }) => {
   const copyToClipboard = () => {
     const tempTextArea = document.createElement("textarea");
     tempTextArea.value = tags.map((e) => e.tag + ",").join(" ");
@@ -18,6 +18,7 @@ const Card_tags = ({ tags }) => {
           <path d="M1.5 12.3286L8.35 19.1786L22.05 4.5" stroke="#517C77" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
         `;
   };
+
   return (
     <div className="card-container">
       <div className="card">
@@ -25,6 +26,7 @@ const Card_tags = ({ tags }) => {
           {"Tags"}
           <svg
             id="copyIconTags"
+            className="svgicon"
             onClick={copyToClipboard}
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -47,18 +49,19 @@ const Card_tags = ({ tags }) => {
           </svg>
         </div>
         <div className="tag-box">
-          {tags.length > 0 && tags !== undefined ? (
+          {tags && tags.length > 0 && tags !== undefined ? (
             tags.map((e, index) => (
-              <div className="messages">
-                <span key={index}>{e.tag}</span>
+              <div className="messages" key={index}>
+                <span>{e.tag}</span>
               </div>
             ))
           ) : (
-            <Skeleton count={10}></Skeleton>
-          )}{" "}
+            <Skeleton count={10} />
+          )}
         </div>
       </div>
     </div>
   );
 };
-export default Card_tags;
+
+export default CardTags;

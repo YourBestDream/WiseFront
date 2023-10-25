@@ -19,8 +19,6 @@
     padding: 1rem;
     overflow: hidden;
     font-family: Karla, sans-serif;
-    font-size: 18px;
-    color: rgb(108, 166, 159);
     max-width: 493px;
     min-width: 322px;
     text-align: left;
@@ -33,33 +31,18 @@
     flex-direction: row;
     font-family: "Krub", sans-serif;
     text-align: left;
-    font-weight: bold;
+    font-weight: 500;
     color:#517C77;
-    font-size: 28px;
+    font-size: clamp(15px,2.3vw,28px);
+}
+
+.card .svgicon{
+    width:clamp(16px,2vw,24px);
+    height:clamp(16px,2vw,24px);
 }
 
 .card .text{
     padding-top: 10px;
-}
-@media (max-width: 796px){
-.card{
-    box-shadow: 0px 1px 5px 0px #6CA69F;
-    backdrop-filter: blur(7.5px); 
-    background-color: rgb(218, 240, 238);
-    border-radius: 14px;
-    padding: 1rem;
-    overflow: hidden;
-    font-family: Karla, sans-serif;
-    font-size: 12px;
+    font-size: clamp(12px,1.95vw,18px);
     color: rgb(108, 166, 159);
-    width: 322px;
-    height: 132px;
-    text-align: left;
-    }
-.card header{
-    font-family: "Krub", sans-serif;
-    text-align: left;
-    font-weight: bold;
-    font-size: 15px;
-}
 }

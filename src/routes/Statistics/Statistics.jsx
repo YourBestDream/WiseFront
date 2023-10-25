@@ -15,19 +15,34 @@ export default function Statistics() {
   const { videoId } = useParams();
   const navigate = useNavigate();
   const [tags, setTags] = useState([]);
+  const [data, setData] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
     initRequest();
+    fetchSummary();
   }, []);
 
   const initRequest = async () => {
     const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&type=video&key=${API_KEY}`;
     const response = await axios.get(url);
     const newTags = [];
-    response.data.items[0].snippet.tags.map((tag) =>
-      newTags.push({ tag: tag })
-    );
-    setTags(newTags);
+    if (response.data.items[0].snippet.tags != null) {
+      response.data.items[0].snippet.tags.map((tag) =>
+        newTags.push({ tag: tag })
+      );
+      setTags(newTags);
+    }
+  };
+
+  const fetchSummary = async () => {
+    try {
+      // const res = await axios.get(`/results/${videoId}`);
+      const res = await axios.get("http://172.31.141.136:5000/results/stats");
+      setData(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
@@ -36,7 +51,7 @@ export default function Statistics() {
         <div className="stats-header">
           <svg
             onClick={() => {
-              dispatch(setPrevPage("statistics"))
+              dispatch(setPrevPage("statistics"));
               navigate("/results");
             }}
             xmlns="http://www.w3.org/2000/svg"
@@ -52,27 +67,30 @@ export default function Statistics() {
           </svg>
           <p>How to Download and Install Minecraft Mods (2023)</p>
         </div>
-        <div className="cards-wrapper">
-          <div className="pair">
-            <Card text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-            <CardTags tags={tags} />
-          </div>
-          <div className="pair">
-            <CardGraph />
-            <CardHelp
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              tags={[
-                { tag: "Minecraft" },
-                { tag: "Mod" },
-                { tag: "Modding" },
-                { tag: "Minecraft" },
-                { tag: "Mod" },
-                { tag: "Modding" },
-                { tag: "Minecraft" },
-                { tag: "Mod" },
-                { tag: "Modding" },
-              ]}
-            />
+        <div className="card-box">
+          <div className="cards-wrapper">
+            <div className="pair">
+              {data ? (
+                <Card text={data["1_paragraph_summary"]} />
+              ) : (
+                <Card text="Please wait while your request is being processed" />
+              )}
+              <CardTags tags={tags} />
+            </div>
+            <div className="pair">
+              <CardGraph />
+              {data ? (
+                <CardHelp
+                  text={data["similar_video_idea_summary"]}
+                  tags={data["tags"]}
+                />
+              ) : (
+                <CardHelp
+                  text="Please wait while your request is being processed"
+                  tags={["Please wait while your request is being processed"]}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
