@@ -7,8 +7,9 @@ export default function CardHelp (props) {
         setClick(!click);
     }
     const copyToClipboard = () => {
-        const combinedContent = `Idea:\n${props.text}\nTags:\n ${props.tags.map((e) => `${e.tag}` + ",").join(' ')}`;
-    
+        // const combinedContent = `Idea:\n${props.text}\nTags:\n ${props.tags.map((e) => `${e.tag}` + ",").join(' ')}`;
+        const tags = props.tags.map(tag => tag.trim()).join(', '); // Trim each tag and join with a comma
+        const combinedContent = `Idea:\n${props.text}\nTags:\n${tags}`; // Combine the text and tags
         const tempTextArea = document.createElement('textarea');
         tempTextArea.value = combinedContent;
         document.body.appendChild(tempTextArea);
@@ -57,8 +58,15 @@ export default function CardHelp (props) {
                     <div className='secondary-header'>
                         <p>Possible Tags</p>
                     </div>
-                        <div className='tag-box'>
+                        {/* <div className='tag-box'>
                         {props.tags.map((e, index) =>  <div className='messages'><span key={index}>{"#" + e.tag}</span></div>)}
+                        </div> */}
+                        <div className='tag-box'>
+                            {props.tags.map((tag, index) => (
+                                <div className='messages'>
+                                <span key={index}>{"#" + tag}</span>
+                                </div>
+                            ))}
                         </div>
                     </>
                     ) : null}

@@ -2,9 +2,29 @@ import Card from '../../components/card_info/card_info';
 import CardTags from '../../components/card_tags/card_tags';
 import CardGraph from '../../components/card_graph/card_graph';
 import CardHelp from '../../components/card_help/card_help';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import './Statistics.css';
 
 export default function Statistics() {
+    const [data,setData] = useState(null)
+
+    useEffect(() => {
+        console.log("Fetching data...")
+        const fetchSummary = async () => {
+          try {
+            const res = await axios.get('/results/stats')
+            setData(res.data)
+            console.log(res.data)
+          } catch (error) {
+            console.error("Error fetching data:", error)
+          }
+        }
+      
+        fetchSummary()
+      }, [])
+    
+
     return (
         <>
         <div className='stats'>
@@ -17,14 +37,24 @@ export default function Statistics() {
             <div className='card-box'>
                 <div className='cards-wrapper'>
                     <div className='pair'>
-                        <Card text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+                        { data ?
+                        <Card text = {data["1_paragraph_summary"]} />
+                        :
+                        <Card text = "Please wait while your request is being processed" />
+                        }
                         <CardTags tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Klein"}, {tag: "Nazi"}, {tag: "Slavery"}, {tag: "LMLMLMLM"}, {tag: "Coinflip"}, {tag: "JJK"}]}/>
                     </div>
                     <div className='pair'>
                         <CardGraph />
+                        { data ?
                         <CardHelp 
-                        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        tags = {[{tag: "Minecraft"}, {tag: "Mod"}, {tag: "Modding"}, {tag: "Klein"}, {tag: "Nazi"}, {tag: "Slavery"}, {tag: "LMLMLMLM"}, {tag: "Coinflip"}, {tag: "JJK"}]}/>
+                        text = {data["similar_video_idea_summary"]}
+                        tags = {data["tags"]}/>
+                        :
+                        <CardHelp 
+                        text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " 
+                        tags = {["motivation","demotivation"]}/>
+                        }
                     </div>
                 </div>
             </div>
