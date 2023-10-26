@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import Profile from "./routes/Profile";
 import Login from "./routes/Login";
@@ -9,10 +9,13 @@ import Statistics from "./routes/Statistics/Statistics";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
+  const location = useLocation();
+
+  const routesWithoutTopBar = ["/login"];
   return (
     <>
       <ThemeProvider>
-        <TopBar />
+        {!routesWithoutTopBar.includes(location.pathname) && <TopBar />}
         <div className="flex">
           <SideBar />
           <div className="w-full">

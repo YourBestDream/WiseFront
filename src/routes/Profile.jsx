@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../components/TopBar";
 import Card from "../components/Card";
 import PieChartComponent from "../components/PieChartComponent";
 import { Container, Typography } from "@mui/material";
 import TextProfileCard3 from "../components/TextProfileCard3";
 import CircleAvatar from "../components/CircleAvatar";
+import axios from "axios";
+import { handleAuth } from "../functions/handleAuth";
+import { useNavigate } from "react-router-dom";
+import { getCookie } from "../functions/cookies";
+import Skeleton from "react-loading-skeleton";
+import { transformDateFormat } from "../functions/formatters";
 
 const Profile = () => {
+  const [profile, setProfile] = useState(null);
+  const [statistics, setStatistics] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    initRequest();
+  }, []);
+
+  const initRequest = async () => {
+    const profileUrl = "http://localhost:8080/api/v1/youtube/profile";
+    const statisticsUrl = "http://localhost:8080/api/v1/youtube/statistics";
+    await handleAuth(navigate, setLoading);
+    const accessToken = getCookie("access_token");
+    const profileResponse = await axios.get(profileUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setProfile(profileResponse.data);
+
+    const statisticsResponse = await axios.get(statisticsUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setStatistics(statisticsResponse.data);
+    console.log(statisticsResponse.data);
+  };
   return (
     <div className="bg-primary pt-[50px] lg:pt-[70px] min-h-[100vh]">
       <div className="p-[20px] grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
@@ -18,25 +53,28 @@ const Profile = () => {
                   Channel Name
                 </h3>
                 <h3 className="text-primary font-bold text-center xl:text-2xl text:md">
-                  SuperKiller1337
+                  {profile?.youtubeChannelName || <Skeleton />}
                 </h3>
               </div>
               <div className="xl:row-span-2 row-start-1 row-span-3 flex justify-center items-center">
-                <CircleAvatar
-                  imageUrl={
-                    "https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png"
-                  }
-                  size={"[150px]"}
-                  classAdd="md:w-[240px] md:h-[240px]"
-                  howRounded={"full"}
-                />
+                <div
+                  style={{
+                    backgroundImage: `url(${profile?.profilePictureUrl})`,
+                  }}
+                  className={`h-[150px] w-[150px] rounded-full bg-cover md:w-[240px] md:h-[240px] bg-center`}></div>
               </div>
               <div className="flex justify-center flex-col items-center xl:items-start">
                 <h3 className="text-primary font-bold xl:text-xl text:sm">
                   1st Video
                 </h3>
                 <h3 className="text-primary xl:text-xl text:md font-['Karla']">
-                  12/02/2014
+                  {profile && profile.youtubeFirstVideoDate ? (
+                    transformDateFormat(profile.youtubeFirstVideoDate)
+                  ) : profile ? (
+                    "No videos yet"
+                  ) : (
+                    <Skeleton />
+                  )}
                 </h3>
               </div>
               <div className="flex justify-center flex-col items-center xl:items-start">
@@ -44,7 +82,11 @@ const Profile = () => {
                   Registered
                 </h3>
                 <h3 className="text-primary xl:text-xl text:md font-['Karla']">
-                  12/02/2010
+                  {profile ? (
+                    transformDateFormat(profile?.youtubeRegistrationDate)
+                  ) : (
+                    <Skeleton />
+                  )}
                 </h3>
               </div>
             </div>
@@ -57,7 +99,7 @@ const Profile = () => {
                 Subscribers
               </h3>
               <h3 className="text-primary font-bold text-center xl:text-2xl text:md font-['Karla']">
-                1,236,582
+                {statistics?.subscriberCount || <Skeleton />}
               </h3>
             </div>
             <div className="flex flex-col justify-center items-center">
@@ -86,13 +128,13 @@ const Profile = () => {
               fColor={"#517C77"}
               sColor={"#517C77"}
               fText={"Views"}
-              sText={"150.2K"}
+              sText={statistics?.viewCount || <Skeleton />}
             />
             <TextProfileCard3
               fColor={"#517C77"}
               sColor={"#517C77"}
-              fText={"Likes"}
-              sText={"1.6K"}
+              fText={"Videos"}
+              sText={statistics?.videoCount || <Skeleton />}
             />
             <TextProfileCard3
               fColor={"#517C77"}
