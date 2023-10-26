@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { setPrevPage } from "../../features/resultsSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
 
 export default function Statistics() {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -16,6 +17,7 @@ export default function Statistics() {
   const navigate = useNavigate();
   const [tags, setTags] = useState([]);
   const [data, setData] = useState(null);
+  const [videoInfo, setVideoInfo] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
     initRequest();
@@ -31,6 +33,7 @@ export default function Statistics() {
         newTags.push({ tag: tag })
       );
       setTags(newTags);
+      setVideoInfo(response.data.items[0].snippet);
     }
   };
 
@@ -64,7 +67,7 @@ export default function Statistics() {
               fill="#2F4846"
             />
           </svg>
-          <p>How to Download and Install Minecraft Mods (2023)</p>
+          <p>{videoInfo?.title || <Skeleton />}</p>
         </div>
         <div className="card-box">
           <div className="cards-wrapper">
