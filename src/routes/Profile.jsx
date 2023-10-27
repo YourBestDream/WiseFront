@@ -61,7 +61,7 @@ const Profile = () => {
                   style={{
                     backgroundImage: `url(${profile?.profilePictureUrl})`,
                   }}
-                  className={`h-[150px] w-[150px] rounded-full bg-cover md:w-[240px] md:h-[240px] bg-center`}></div>
+                  className={`h-[150px] w-[150px] rounded-full md:w-[240px] md:h-[240px] bg-cover`}></div>
               </div>
               <div className="flex justify-center flex-col items-center xl:items-start">
                 <h3 className="text-primary font-bold xl:text-xl text:sm">

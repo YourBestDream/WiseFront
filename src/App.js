@@ -7,6 +7,7 @@ import SideBar from "./components/SideBar";
 import Results from "./routes/Results";
 import Statistics from "./routes/Statistics/Statistics";
 import PrivateRoute from "./components/PrivateRoute";
+import { getCookie } from "./functions/cookies";
 
 function App() {
   const location = useLocation();
@@ -15,7 +16,7 @@ function App() {
   return (
     <>
       <ThemeProvider>
-        {!routesWithoutTopBar.includes(location.pathname) && <TopBar />}
+        {getCookie("refresh_token") && <TopBar />}
         <div className="flex">
           <SideBar />
           <div className="w-full">
